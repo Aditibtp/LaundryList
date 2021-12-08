@@ -1,0 +1,41 @@
+html, body{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.outer-ll-cont{
+    display: flex;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+}
+
+.list-top-buckle{
+    position: absolute;
+    height: 14%;
+    width: 36%;
+    border: 13px solid #5831f3;
+    margin-top: -55px;
+    border-radius: 5px;
+    border-radius: 10px 10px 35px 35px;
+    background: white;
+}
+
+.ll-cont{
+    height: inherit;
+    width: inherit;
+    background-color: #619a9d;
+    display: flex;
+    height: 75%;
+    width: 50%;
+    border: 6px solid #c919ab;
+    border-radius: 5px;
+}
