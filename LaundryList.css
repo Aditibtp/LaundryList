@@ -5,6 +5,12 @@ html, body{
     justify-items: center;
     align-items: center;
     flex-direction: column;
+    
+}
+
+html{
+    background-image: url("background.jpg");
+    background-repeat: round;
 }
 
 .outer-ll-cont{
@@ -22,11 +28,13 @@ html, body{
     position: absolute;
     height: 14%;
     width: 36%;
-    border: 13px solid #7c7c7c99;
-    margin-top: -55px;
-    border-radius: 5px;
-    border-radius: 15px 15px 45px 45px;
+    border: 10px solid #28282870;
+    margin-top: -60px;
+    border-radius: 25px 25px 55px 55px;
     background: #f1f1f1;
+    max-width: 550px;
+    max-height: 162px;
+    box-shadow: inset 8px -19px 73px 52px #565656;
 }
 
 .ll-cont{
@@ -38,6 +46,8 @@ html, body{
     width: 50%;
     border: 6px solid #c919ab;
     border-radius: 5px;
+    max-width: 750px;
+    max-height: 915px;
 }
 
 div#laundry-list-list{
@@ -83,4 +93,14 @@ div#laundry-list-list::-webkit-scrollbar-thumb:hover {
 .list-container{
     height: 100%;
     width: 100%;
+    max-width: 750px;
+    max-height: 915px;
+}
+
+.edit-list{
+    height: 85%;
+    margin: 5%;
+    width: 85%;
+    background: inherit;
+    opacity: 90%;
 }
