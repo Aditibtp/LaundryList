@@ -11,10 +11,10 @@
     },
     "action": {
       "default_icon": {
-        "16": "check-list.png"
+        "16": "images/check-list.png"
         }
     },
     "icons": {
-      "16": "check-list.png"
+      "16": "images/check-list.png"
     }
   }
