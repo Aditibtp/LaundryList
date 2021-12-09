@@ -102,13 +102,32 @@ div#laundry-list-list::-webkit-scrollbar-thumb:hover {
 }
 
 .edit-list{
-    height: 85%;
+    height: 80%;
     /* margin: 5px 15px 10px 10px; */
-    width: 95%;
+    width: 85%;
     background: inherit;
     opacity: 90%;
     border: 5px solid #007056;
     border-radius: 2px;
     font-size: medium;
     font-family: ui-monospace;
+}
+
+div.buttons button{
+    width: 25px;
+    height: 25px;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    /* margin-left: 26px; */
+    align-items: center;
+}
+
+div.buttons button:hover {
+    border: 3px solid #93af3f;
+    border-radius: 10px;
+    /* opacity: 60%; */
 }
