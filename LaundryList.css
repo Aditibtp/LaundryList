@@ -22,11 +22,11 @@ html, body{
     position: absolute;
     height: 14%;
     width: 36%;
-    border: 13px solid #5831f3;
+    border: 13px solid #7c7c7c99;
     margin-top: -55px;
     border-radius: 5px;
-    border-radius: 10px 10px 35px 35px;
-    background: white;
+    border-radius: 15px 15px 45px 45px;
+    background: #f1f1f1;
 }
 
 .ll-cont{
@@ -38,4 +38,49 @@ html, body{
     width: 50%;
     border: 6px solid #c919ab;
     border-radius: 5px;
+}
+
+div#laundry-list-list{
+    height: 88%;
+    width: 100%;
+    margin-top: 15%;
+    overflow-y: hidden;
+}
+
+div#laundry-list-list:hover{
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+div#laundry-list-list::-webkit-scrollbar {
+    width: 8px;
+    border: 1px solid black;
+    background: blue;
+    border-radius: 5px;
+}
+
+div#laundry-list-list::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+div#laundry-list-list::-webkit-scrollbar-thumb {
+    background: #555;
+}
+
+div#laundry-list-list::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+
+.todo-list {
+    width: 95%;
+    height: 15%;
+    border: 4px solid #9bdfa9;
+    margin: 1%;
+    /* overflow: scroll; */
+}
+
+.list-container{
+    height: 100%;
+    width: 100%;
 }
