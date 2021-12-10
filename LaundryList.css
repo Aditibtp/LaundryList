@@ -109,8 +109,9 @@ div#laundry-list-list::-webkit-scrollbar-thumb:hover {
     opacity: 90%;
     border: 5px solid #007056;
     border-radius: 2px;
-    font-size: medium;
-    font-family: ui-monospace;
+    font-size: large;
+    font-family: system-ui;
+    color: #ddffff;
 }
 
 div.buttons button{
