@@ -119,12 +119,30 @@ div.buttons button{
     height: 25px;
 }
 
+.span-text{
+    height: 80%;
+    /* margin: 5px 15px 10px 10px; */
+    width: 85%;
+    background: inherit;
+    opacity: 90%;
+    border: 5px solid #007056;
+    border-radius: 2px;
+    font-size: large;
+    font-family: serif;
+    color: #000000;
+    padding: 10px;
+}
+
 .buttons{
     display: flex;
     flex-direction: column;
     width: 15%;
     /* margin-left: 26px; */
     align-items: center;
+}
+
+.save-item img{
+    pointer-events: none;
 }
 
 div.buttons button:hover {
