@@ -22,29 +22,58 @@ function attachfunctiontobody(){
 
     console.log("inside body")
 
-    someitem.addEventListener('click', handleSaveButtonClick, false);
+    //someitem.addEventListener('click', handleSaveButtonClick, false);
 
-    edititem.addEventListener('click', handleEditButtonClick, false);
+    //edititem.addEventListener('click', handleEditButtonClick, false);
 
     //TODO
     function populateAlreadyAddedTasks(){
+        let tasksInStorage = localStorage.getItem("LaundryList");
+        if(tasksInStorage === null) return;
 
+        laundryListObj = JSON.parse(tasksInStorage); 
+
+        for(var i=0; i<laundryListObj.totalItemsAdded; i++){
+            let idSuffix = i+1;
+            let spanelement = document.createElement("span");
+            spanelement.className = "span-text";
+            spanelement.textContent = laundryListObj.addedtasks[i].taskString;
+
+            let divelement = document.getElementById("item-div-"+(idSuffix));
+            let textelement = document.getElementById("item-value-"+(idSuffix));
+
+            textelement.style.display = "none";
+            
+            divelement.appendChild(spanelement);
+        }
     }
 
     function attachSaveTaskListener(){
+        console.log("sakdhfo");
+        let saveButtonElements = document.querySelectorAll(".save-item");
 
+        for(var i=0; i<saveButtonElements.length; i++){
+            let idSuffix = i+1;
+            saveButtonElements[i].addEventListener('click', handleSaveButtonClick, false);
+        }
     }
 
     function attachEditTaskListener(){
-
+        
     }
 
     function attachDoneTaskListener(){
 
     }
 
+    populateAlreadyAddedTasks();
+    attachSaveTaskListener();
+
     function handleSaveButtonClick(event){
-        let textelement = document.getElementById("item-value-1");
+
+        let buttonId = event.currentTarget.id;
+        let idSuffix = buttonId.slice(10);
+        let textelement = document.getElementById("item-value-"+idSuffix);
         let textelementvalue = textelement.value;
 
         console.log(event.currentTarget.id);
@@ -54,7 +83,7 @@ function attachfunctiontobody(){
         let spanelement = document.createElement("span");
         spanelement.className = "span-text";
         spanelement.textContent = textelementvalue;
-        let divelement = document.getElementById("item-div-1");
+        let divelement = document.getElementById("item-div-"+idSuffix);
         textelement.style.display = "none";
         
         divelement.appendChild(spanelement);
@@ -85,15 +114,15 @@ function attachfunctiontobody(){
             }
         );
 
-        let itemsAdded = laundryListObj.totalDoneItemsThisWeek;
+        let itemsAdded = laundryListObj.totalItemsAdded;
 
         if(itemsAdded != "undefined" && !isNaN(itemsAdded) && itemsAdded !== null){
-            laundryListObj.totalDoneItemsThisWeek = parseInt(itemsAdded) + 1;
+            laundryListObj.totalItemsAdded = parseInt(itemsAdded) + 1;
         }else{
-            laundryListObj.totalDoneItemsThisWeek = 1;
+            laundryListObj.totalDoneItemsTtotalItemsAddedhisWeek = 1;
         }
 
-        console.log(laundryListObj.totalDoneItemsThisWeek);
+        console.log(laundryListObj.totalItemsAdded);
 
         tasks.addedtasks.push({taskString: taskadded, timeAdded: Date.now()});
         localStorage.setItem("LaundryList", JSON.stringify(laundryListObj));
