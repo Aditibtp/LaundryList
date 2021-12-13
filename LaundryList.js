@@ -26,18 +26,35 @@ function attachfunctiontobody(){
 
     edititem.addEventListener('click', handleEditButtonClick, false);
 
-    function handleSaveButtonClick(event){
-        var textelement = document.getElementById("item-value-1");
-        var textelementvalue = textelement.value;
+    //TODO
+    function populateAlreadyAddedTasks(){
 
-        console.log(event.disabled);
+    }
+
+    function attachSaveTaskListener(){
+
+    }
+
+    function attachEditTaskListener(){
+
+    }
+
+    function attachDoneTaskListener(){
+
+    }
+
+    function handleSaveButtonClick(event){
+        let textelement = document.getElementById("item-value-1");
+        let textelementvalue = textelement.value;
+
+        console.log(event.currentTarget.id);
         
         saveToLocalStorage(textelementvalue, true);
 
-        var spanelement = document.createElement("span");
+        let spanelement = document.createElement("span");
         spanelement.className = "span-text";
         spanelement.textContent = textelementvalue;
-        var divelement = document.getElementById("item-div-1");
+        let divelement = document.getElementById("item-div-1");
         textelement.style.display = "none";
         
         divelement.appendChild(spanelement);
