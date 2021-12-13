@@ -7,12 +7,15 @@ Storage.prototype.getObj = function(key) {
 
 function attachfunctiontobody(){
 
-    var tasks = {
+    let tasks = {
         addedtasks: [],
         donetasks: [],
         totalItemsAdded: 0,
         totalDoneItemsThisWeek: 0
     }
+
+    let itemvalueId = "item-value-";
+
 
     let someitem = document.getElementById("item-save-1");
     let edititem = document.getElementById("item-edit-1");
@@ -23,9 +26,11 @@ function attachfunctiontobody(){
 
     edititem.addEventListener('click', handleEditButtonClick, false);
 
-    function handleSaveButtonClick(){
+    function handleSaveButtonClick(event){
         var textelement = document.getElementById("item-value-1");
         var textelementvalue = textelement.value;
+
+        console.log(event.disabled);
         
         saveToLocalStorage(textelementvalue, true);
 
@@ -42,8 +47,20 @@ function attachfunctiontobody(){
 
     function saveToLocalStorage(taskadded, newtodo){
         let tasksInStorage = localStorage.getItem("LaundryList");
-        let laundryListObj = JSON.parse(tasksInStorage);
+        let laundryListObj = {};
+        if(tasksInStorage === null){
+            laundryListObj = {
+                addedtasks: [],
+                donetasks: [],
+                totalItemsAdded: 0,
+                totalDoneItemsThisWeek: 0
+            }
+        }else{
+            laundryListObj = JSON.parse(tasksInStorage);
+        }
+
         console.log(laundryListObj);
+       
         laundryListObj.addedtasks.push(
             {
                 taskString: taskadded,
