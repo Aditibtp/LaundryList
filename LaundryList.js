@@ -9,7 +9,9 @@ function attachfunctiontobody(){
 
     var tasks = {
         addedtasks: [],
-        donetasks: []
+        donetasks: [],
+        totalItemsAdded: 0,
+        totalDoneItemsThisWeek: 0
     }
 
     let someitem = document.getElementById("item-save-1");
@@ -25,7 +27,7 @@ function attachfunctiontobody(){
         var textelement = document.getElementById("item-value-1");
         var textelementvalue = textelement.value;
         
-        saveToLocalStorage(textelementvalue);
+        saveToLocalStorage(textelementvalue, true);
 
         var spanelement = document.createElement("span");
         spanelement.className = "span-text";
@@ -38,7 +40,7 @@ function attachfunctiontobody(){
         this.disabled = true;
     }
 
-    function saveToLocalStorage(taskadded){
+    function saveToLocalStorage(taskadded, newtodo){
         let tasksInStorage = localStorage.getItem("LaundryList");
         let laundryListObj = JSON.parse(tasksInStorage);
         console.log(laundryListObj);
@@ -48,6 +50,17 @@ function attachfunctiontobody(){
                 timeAdded: Date.now()
             }
         );
+
+        let itemsAdded = laundryListObj.totalDoneItemsThisWeek;
+
+        if(itemsAdded != "undefined" && !isNaN(itemsAdded) && itemsAdded !== null){
+            laundryListObj.totalDoneItemsThisWeek = parseInt(itemsAdded) + 1;
+        }else{
+            laundryListObj.totalDoneItemsThisWeek = 1;
+        }
+
+        console.log(laundryListObj.totalDoneItemsThisWeek);
+
         tasks.addedtasks.push({taskString: taskadded, timeAdded: Date.now()});
         localStorage.setItem("LaundryList", JSON.stringify(laundryListObj));
     }
