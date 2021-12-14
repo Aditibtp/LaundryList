@@ -49,7 +49,7 @@ function attachfunctiontobody(){
     }
 
     function attachSaveTaskListener(){
-        console.log("sakdhfo");
+        console.log("attached save clicks");
         let saveButtonElements = document.querySelectorAll(".save-item");
 
         for(var i=0; i<saveButtonElements.length; i++){
@@ -59,7 +59,14 @@ function attachfunctiontobody(){
     }
 
     function attachEditTaskListener(){
-        
+        console.log("attached edit clicks");
+
+        let editButtonElements = document.querySelectorAll(".edit-item");
+
+        for(var i=0; i<editButtonElements.length; i++){
+            let idSuffix = i+1;
+            editButtonElements[i].addEventListener('click', handleEditButtonClick, false);
+        }
     }
 
     function attachDoneTaskListener(){
@@ -68,17 +75,18 @@ function attachfunctiontobody(){
 
     populateAlreadyAddedTasks();
     attachSaveTaskListener();
+    attachEditTaskListener();
 
     function handleSaveButtonClick(event){
 
         let buttonId = event.currentTarget.id;
-        let idSuffix = buttonId.slice(10);
+        let idSuffix = parseInt(buttonId.slice(10));
         let textelement = document.getElementById("item-value-"+idSuffix);
         let textelementvalue = textelement.value;
 
         console.log(event.currentTarget.id);
         
-        saveToLocalStorage(textelementvalue, true);
+        saveToLocalStorage(textelementvalue, idSuffix);
 
         let spanelement = document.createElement("span");
         spanelement.className = "span-text";
@@ -91,7 +99,7 @@ function attachfunctiontobody(){
         this.disabled = true;
     }
 
-    function saveToLocalStorage(taskadded, newtodo){
+    function saveToLocalStorage(taskadded, idSuffix){
         let tasksInStorage = localStorage.getItem("LaundryList");
         let laundryListObj = {};
         if(tasksInStorage === null){
@@ -105,41 +113,62 @@ function attachfunctiontobody(){
             laundryListObj = JSON.parse(tasksInStorage);
         }
 
-        console.log(laundryListObj);
-       
-        laundryListObj.addedtasks.push(
-            {
-                taskString: taskadded,
-                timeAdded: Date.now()
-            }
-        );
-
-        let itemsAdded = laundryListObj.totalItemsAdded;
-
-        if(itemsAdded != "undefined" && !isNaN(itemsAdded) && itemsAdded !== null){
-            laundryListObj.totalItemsAdded = parseInt(itemsAdded) + 1;
+        if(idSuffix - 1 <= laundryListObj.totalItemsAdded){
+            laundryListObj.addedtasks[idSuffix-1].taskString = taskadded;
         }else{
-            laundryListObj.totalDoneItemsTtotalItemsAddedhisWeek = 1;
+            laundryListObj.addedtasks.push(
+                {
+                    taskString: taskadded,
+                    timeAdded: Date.now()
+                }
+            );
+    
+            let itemsAdded = laundryListObj.totalItemsAdded;
+    
+            if(itemsAdded != "undefined" && !isNaN(itemsAdded) && itemsAdded !== null){
+                laundryListObj.totalItemsAdded = parseInt(itemsAdded) + 1;
+            }else{
+                laundryListObj.totalDoneItemsTtotalItemsAddedhisWeek = 1;
+            }
+    
+            console.log(laundryListObj.totalItemsAdded);
         }
 
-        console.log(laundryListObj.totalItemsAdded);
+        console.log(laundryListObj);
+       
+        
 
         tasks.addedtasks.push({taskString: taskadded, timeAdded: Date.now()});
         localStorage.setItem("LaundryList", JSON.stringify(laundryListObj));
     }
 
-    function handleEditButtonClick(){
-        var textelement = document.getElementById("item-value-1");
-        var textelementvalue = textelement.value;
-        var spanelement = document.createElement("span");
-        spanelement.className = "span-text";
-        spanelement.textContent = textelementvalue;
-        var divelement = document.getElementById("item-div-1");
-        textelement.style.display = "none";
-        
-        divelement.appendChild(spanelement);
+    function handleEditButtonClick(event){
 
-        this.disabled = true;
+        let tasksInStorage = localStorage.getItem("LaundryList");
+        let laundryListObj = {};
+        if(tasksInStorage === null){
+            laundryListObj = {
+                addedtasks: [],
+                donetasks: [],
+                totalItemsAdded: 0,
+                totalDoneItemsThisWeek: 0
+            }
+        }else{
+            laundryListObj = JSON.parse(tasksInStorage);
+        }
+
+        let buttonId = event.currentTarget.id;
+        let idSuffix = buttonId.slice(10);
+
+        //let divelement = document.getElementById("item-div-"+idSuffix);
+        let spanelement = document.querySelector("#item-div-"+idSuffix + " span");
+        let textelement = document.getElementById("item-value-"+idSuffix);
+        spanelement.style.display = "none";
+
+        console.log((idSuffix))
+        textelement.value = laundryListObj.addedtasks[parseInt(idSuffix)-1].taskString;
+        textelement.style.display = "block";
+
     }
 }
 
