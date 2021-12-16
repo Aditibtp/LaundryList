@@ -149,3 +149,7 @@ div.buttons button:hover {
     border-radius: 10px;
     /* opacity: 60%; */
 }
+
+.done-task-item{
+    opacity: 0.6;
+}

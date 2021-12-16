@@ -14,18 +14,6 @@ function attachfunctiontobody(){
         totalDoneItemsThisWeek: 0
     }
 
-    let itemvalueId = "item-value-";
-
-
-    let someitem = document.getElementById("item-save-1");
-    let edititem = document.getElementById("item-edit-1");
-
-    console.log("inside body")
-
-    //someitem.addEventListener('click', handleSaveButtonClick, false);
-
-    //edititem.addEventListener('click', handleEditButtonClick, false);
-
     //TODO
     function populateAlreadyAddedTasks(){
         let tasksInStorage = localStorage.getItem("LaundryList");
@@ -71,11 +59,35 @@ function attachfunctiontobody(){
 
     function attachDoneTaskListener(){
 
+        let doneButtonElements = document.querySelectorAll(".done-item");
+
+        for(var i=0; i<doneButtonElements.length; i++){
+            let idSuffix = i+1;
+            doneButtonElements[i].addEventListener('click', handleDoneButtonClick, false);
+        }
     }
 
     populateAlreadyAddedTasks();
     attachSaveTaskListener();
     attachEditTaskListener();
+    attachDoneTaskListener();
+
+    function handleDoneButtonClick(event){
+        let buttonId = event.currentTarget.id;
+        let idSuffix = parseInt(buttonId.slice(10));
+        let textelement = document.getElementById("item-value-"+idSuffix);
+        let textelementvalue = textelement.value;
+
+        console.log(event.currentTarget.id);
+
+        let divId = "item-div-"+idSuffix;
+        let buttonDiv = document.querySelector("#" + divId + " .buttons");
+        buttonDiv.style.visibility = "hidden";
+
+        let divTaskElement = document.getElementById(divId);
+
+        divTaskElement.classList.add("done-task-item");
+    }
 
     function handleSaveButtonClick(event){
 
@@ -96,7 +108,7 @@ function attachfunctiontobody(){
         
         divelement.appendChild(spanelement);
 
-        this.disabled = true;
+        event.currentTarget.disabled = true;
     }
 
     function saveToLocalStorage(taskadded, idSuffix){
